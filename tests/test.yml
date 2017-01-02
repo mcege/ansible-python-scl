@@ -1,0 +1,10 @@
+---
+- hosts: servers
+  become: yes
+  become_method: sudo
+  roles:
+    - { role: ansible-python-scl,
+        python_scl_online_installation: True,
+        sky_offline_repo_ip: 172.27.98.90,
+        python_scl_install_extra_packages: True
+      }

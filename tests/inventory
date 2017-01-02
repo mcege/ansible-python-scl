@@ -1,0 +1,5 @@
+[all]
+cma-test-db-1 ansible_host=10.134.50.251
+
+[servers]
+cma-test-db-1
