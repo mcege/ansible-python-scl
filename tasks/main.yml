@@ -1,0 +1,11 @@
+---
+
+-  include: prerequisite.yml
+
+-  include: python.yml
+
+-  include: oracle.yml
+   when: python_scl_cx_oracle
+
+-  include: extras.yml
+   when: python_scl_install_extra_packages

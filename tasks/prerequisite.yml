@@ -1,0 +1,114 @@
+---
+# prerequisite for installing python
+
+- name: remove if there is already a compiled python2.7
+  file:
+    path: "{{item}}"
+    state: absent
+  with_items:
+    - /usr/local/lib/libpython2.7.a
+    - /usr/local/lib/pkgconfig/python-2.7.pc
+    - /usr/local/lib/python2.7
+    - /usr/local/bin/2to3
+    - /usr/local/bin/easy_install
+    - /usr/local/bin/easy_install-2.7
+    - /usr/local/bin/echo_supervisord_conf
+    - /usr/local/bin/gunicorn
+    - /usr/local/bin/gunicorn_django
+    - /usr/local/bin/gunicorn_paster
+    - /usr/local/bin/idle
+    - /usr/local/bin/pidproxy
+    - /usr/local/bin/pip
+    - /usr/local/bin/pip2
+    - /usr/local/bin/pip2.7
+    - /usr/local/bin/pydoc
+    - /usr/local/bin/python2.7
+    - /usr/local/bin/python2.7-config
+    - /usr/local/bin/smtpd.py
+    - /usr/local/bin/supervisord
+    - /usr/local/bin/supervisorctl
+    - /usr/local/bin/virtualenv
+  ignore_errors: True
+  when: python_scl_remove_alt_python
+
+# required for freetds
+- name: add epel repo if online
+  get_url:
+    url: http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    dest: /tmp/epel-release-6-8.noarch.rpm
+  when: python_scl_online_installation
+
+- name: install epel repo if online
+  yum: name=/tmp/epel-release-6-8.noarch.rpm state=present
+  when: python_scl_online_installation
+
+- name: install development tools for python
+  yum: name={{item}} state=present
+  with_items:
+    - bison
+    - byacc
+    - cscope
+    - ctags
+    - cvs
+    - diffstat
+    - doxygen
+    - flex
+    - gcc
+    - gcc-c++
+    - gcc-gfortran
+    - gettext
+    - git
+    - indent
+    - intltool
+    - libtool
+    - patch
+    - patchutils
+    - rcs
+    - redhat-rpm-config
+    - rpm-build
+    - subversion
+    - swig
+    - systemtap
+
+- name: install python prerequisite packages
+  yum: name={{item}} state=present
+  with_items: 
+    - zlib-devel
+    - bzip2-devel
+    - ncurses-devel
+    - libffi-devel
+    - libxslt-devel
+    - libxml2-devel
+    - openssl-devel
+    - python-devel
+    - postgresql-devel
+    - postgresql-libs
+    - libjpeg-turbo-devel
+    - unixODBC
+    - unixODBC-devel
+    - freetds
+    - freetds-devel
+    - sqlite
+    - sqlite-devel
+    - readline-devel
+    - tk-devel
+    - gdbm-devel
+    - db4-devel
+    - libpcap-devel
+    - xz-devel
+    - mysql-devel
+    - mysql-libs
+    - freetype-devel
+    - systemtap-sdt-devel
+    - valgrind-devel
+    - expat-devel
+
+#- name: add locale settings
+#  blockinfile: 
+#    dest: /etc/environment
+#    block: |
+#      export LC_ALL="en_US.UTF-8"
+#      export LC_CTYPE="en_US.UTF-8"
+
+#- name: source /etc/environment
+#  shell: source /etc/environment

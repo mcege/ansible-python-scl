@@ -1,0 +1,32 @@
+---
+# task to install python related extra packages
+
+- name: install packages online
+  pip:
+    name: "{{item}}"
+    executable: "{{python_scl_pip}}"
+    state: forcereinstall
+    extra_args: --no-dependencies
+  environment:
+    PATH: "{{python_scl_path}}"
+    LD_LIBRARY_PATH: "{{python_scl_ld_library_path}}"
+    MANPATH: "{{python_scl_manpath}}"
+    XDG_DATA_DIRS: "{{python_scl_xdg_data_dirs}}"
+    PKG_CONFIG_PATH: "{{python_scl_pkg_config_path}}"
+  with_items: "{{python_scl_extra_packages}}"
+  when: python_scl_online_installation
+
+- name: install packages offline
+  pip:
+    name: "{{python_scl_offline_url}}/{{item}}"
+    executable: "{{python_scl_pip}}"
+    state: forcereinstall
+    extra_args: --no-dependencies
+  environment:
+    PATH: "{{python_scl_path}}"
+    LD_LIBRARY_PATH: "{{python_scl_ld_library_path}}"
+    MANPATH: "{{python_scl_manpath}}"
+    XDG_DATA_DIRS: "{{python_scl_xdg_data_dirs}}"
+    PKG_CONFIG_PATH: "{{python_scl_pkg_config_path}}"
+  with_items: "{{python_scl_extra_packages}}"
+  when: not python_scl_online_installation

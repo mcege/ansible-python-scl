@@ -1,0 +1,49 @@
+---
+
+python_scl_online_installation: False
+python_scl_offline_repo_tarballs_port: 8002
+
+python_scl_cx_oracle: True
+python_scl_instantclient_folder: instantclient_12_1.zip
+
+python_scl_offline_url: http://{{sky_offline_repo_ip}}:{{python_scl_offline_repo_tarballs_port}}
+
+python_scl_instantclient_url: "{{python_scl_offline_url}}/{{python_scl_instantclient_folder}}"
+
+python_scl_install_extra_packages: False
+
+python_scl_meld_package: meld3-0.6.7.tar.gz
+python_scl_setuptools_package: setuptools-32.1.2.zip
+python_scl_supervisor_package: supervisor-3.3.1.tar.gz
+python_scl_requests_package: requests-2.11.1.tar.gz
+python_scl_gunicorn_package: gunicorn-19.6.0.tar.gz
+
+python_scl_extra_packages: 
+  - "{{python_scl_meld_package}}"
+  - "{{python_scl_setuptools_package}}"
+  - "{{python_scl_supervisor_package}}"
+  - "{{python_scl_requests_package}}"
+  - "{{python_scl_gunicorn_package}}"
+
+#python_scl_offline_extra_packages:
+#  - "{{python_scl_offline_url}}/{{python_scl_meld_package}}"
+#  - "{{python_scl_offline_url}}/{{python_scl_setuptools_package}}"
+#  - "{{python_scl_offline_url}}/{{python_scl_supervisor_package}}"
+#  - "{{python_scl_offline_url}}/{{python_scl_requests_package}}"
+#  - "{{python_scl_offline_url}}/{{python_scl_gunicorn_package}}"
+
+python_scl_remove_alt_python: False
+
+python_scl_pip: /opt/rh/python27/root/usr/bin/pip
+
+#python_scl_path: /opt/rh/python27/root/usr/bin${PATH:+:${PATH}}
+#python_scl_ld_library_path: /opt/rh/python27/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+#python_scl_manpath: /opt/rh/python27/root/usr/share/man:${MANPATH}
+#python_scl_xdg_data_dirs: /opt/rh/python27/root/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
+#python_scl_pkg_config_path: /opt/rh/python27/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+
+python_scl_path: /opt/rh/python27/root/usr/bin
+python_scl_ld_library_path: /opt/rh/python27/root/usr/lib64
+python_scl_manpath: /opt/rh/python27/root/usr/share/man
+python_scl_xdg_data_dirs: /opt/rh/python27/root/usr/share
+python_scl_pkg_config_path: /opt/rh/python27/root/usr/lib64/pkgconfig

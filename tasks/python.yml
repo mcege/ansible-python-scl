@@ -1,0 +1,30 @@
+---
+# task to install python and after
+
+- name: add centos-release-scl repo if online
+  yum: name=centos-release-scl state=present
+  when: python_scl_online_installation
+
+- name: install python and subsequent packages
+  yum: name={{item}} state=present
+  with_items: 
+    - python27.x86_64   
+    - python27-python-setuptools.noarch
+    - python27-python-libs.x86_64
+    - python27-python-pip.noarch
+    - python27-python-virtualenv.noarch
+    - python27-python-wheel.noarch
+    - python27-python-simplejson.x86_64
+
+#- name: add locale settings
+#  blockinfile: 
+#    dest: /etc/environment
+#    block: |
+#      export PATH=/opt/rh/python27/root/usr/bin${PATH:+:${PATH}}
+#      export LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+#      export MANPATH=/opt/rh/python27/root/usr/share/man:${MANPATH}
+#      export XDG_DATA_DIRS=/opt/rh/python27/root/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
+#      export PKG_CONFIG_PATH=/opt/rh/python27/root/usr/lib64/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+
+#- name: source /etc/environment
+#  shell: source /etc/environment
